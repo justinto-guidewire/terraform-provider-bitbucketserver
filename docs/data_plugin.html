@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>bitbucketserver_plugin · Bitbucket Server Terraform Provider</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This data source allows you to retrieve installed plugin information and license details."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="bitbucketserver_plugin · Bitbucket Server Terraform Provider"/><meta property="og:type" content="website"/><meta property="og:url" content="https://gavinbunney.github.io/terraform-provider-bitbucketserver/"/><meta property="og:description" content="This data source allows you to retrieve installed plugin information and license details."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/terraform-provider-bitbucketserver/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i&amp;display=swap"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/terraform-provider-bitbucketserver/js/scrollSpy.js"></script><link rel="stylesheet" href="/terraform-provider-bitbucketserver/css/main.css"/><script src="/terraform-provider-bitbucketserver/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/terraform-provider-bitbucketserver/"><h2 class="headerTitle">Bitbucket Server Terraform Provider</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"></ul></nav></div></header></div></div><div class="navPusher singleRowMobileNav"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Data Sources</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Bitbucket Server<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/provider">Getting Started</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Data Sources<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_application_properties">bitbucketserver_application_properties</a></li><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_global_permissions_groups">bitbucketserver_global_permissions_groups</a></li><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_global_permissions_users">bitbucketserver_global_permissions_users</a></li><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_group_users">bitbucketserver_group_users</a></li><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_groups">bitbucketserver_groups</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_plugin">bitbucketserver_plugin</a></li><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_project_permissions_groups">bitbucketserver_project_permissions_groups</a></li><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_project_permissions_users">bitbucketserver_project_permissions_users</a></li><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_repository_permissions_groups">bitbucketserver_repository_permissions_groups</a></li><li class="navListItem"><a class="navItem" href="/terraform-provider-bitbucketserver/docs/data_repository_permissions_users">bitbucketserver_repository_permissions_users</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">bitbucketserver_plugin</h1></header><article><div><span><p>This data source allows you to retrieve installed plugin information and license details.</p>
+<h2><a class="anchor" aria-hidden="true" id="example-usage"></a><a href="#example-usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example Usage</h2>
+<pre><code class="hljs"><span class="hljs-attribute">data</span> <span class="hljs-string">"bitbucketserver_plugin"</span> <span class="hljs-string">"my-plugin"</span> {
+  <span class="hljs-attribute">key</span> = <span class="hljs-string">"com.example.plugin-my-plugin"</span>
+}
+</code></pre>
+<ul>
+<li><code>key</code> - Unique key of the plugin.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="attribute-reference"></a><a href="#attribute-reference" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Attribute Reference</h2>
+<ul>
+<li><code>enabled</code> - Set to <code>true</code> if the plugin is enabled.</li>
+<li><code>enabled_by_default</code> - Set to <code>true</code> if the plugin is enabled by default (for system plugins).</li>
+<li><code>version</code> - Installed version of the plugin.</li>
+<li><code>name</code> - Name of the plugin.</li>
+<li><code>description</code> - Plugin description.</li>
+<li><code>user_installed</code> - Set to <code>true</code> if this is a user installed plugin vs a system bundled plugin.</li>
+<li><code>optional</code> - Set to <code>true</code> if this is an optional plugin.</li>
+<li><code>vendor.name</code> - Name of the vendor.</li>
+<li><code>vendor.link</code> - Vendor homepage.</li>
+<li><code>vendor.marketplace_link</code> - Plugin marketplace link.</li>
+<li><code>applied_license.0.valid</code> - Is the license valid. true/false.</li>
+<li><code>applied_license.0.evaluation</code> - Is the license an evaluation. true/false.</li>
+<li><code>applied_license.0.nearly_expired</code> - Is the license nearly expired. true/false.</li>
+<li><code>applied_license.0.maintenance_expiry_date</code> - Date of maintenance expiry.</li>
+<li><code>applied_license.0.maintenance_expired</code> - Is the maintenance expired. true/false.</li>
+<li><code>applied_license.0.license_type</code> - Type of license.</li>
+<li><code>applied_license.0.expiry_date</code> - Expiry date of the license.</li>
+<li><code>applied_license.0.raw_license</code> - The raw license information.</li>
+<li><code>applied_license.0.renewable</code> - Is the license renewabl. true/false.</li>
+<li><code>applied_license.0.organization_name</code> - Name of the organization the license is for.</li>
+<li><code>applied_license.0.enterprise</code> - Is the license for enterprise. true/false.</li>
+<li><code>applied_license.0.data_center</code> - Is the license for data center. true/false.</li>
+<li><code>applied_license.0.subscription</code> - Is the license a subscription. true/false.</li>
+<li><code>applied_license.0.active</code> - Is the license active. true/false.</li>
+<li><code>applied_license.0.auto_renewal</code> - Is the license renewed automatically. true/false.</li>
+<li><code>applied_license.0.upgradable</code> - Is the license able to be upgraded. true/false.</li>
+<li><code>applied_license.0.crossgradeable</code> - Can the license be crossgraded. true/false.</li>
+<li><code>applied_license.0.purchase_past_server_cutoff_date</code> - The purchase date past the server cutoff date. true/false.</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/terraform-provider-bitbucketserver/docs/data_groups"><span class="arrow-prev">← </span><span>bitbucketserver_groups</span></a><a class="docs-next button" href="/terraform-provider-bitbucketserver/docs/data_project_permissions_groups"><span>bitbucketserver_project_permissions_groups</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#example-usage">Example Usage</a></li><li><a href="#attribute-reference">Attribute Reference</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2019 Gavin Bunney</section></footer></div></body></html>
