@@ -20,11 +20,15 @@ test: fmtcheck
 		xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4
 
 testacc: fmtcheck
-	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m -count=1
+	#The ulimit command is required to allow the tests to open more than the default 256 files as set on MacOS. The tests will fail without this. It must be done as one
+	#command otherwise the setting is lost
+	ulimit -n 1024; TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m -count=1
 
 testacc-bitbucket: fmtcheck
 	@sh scripts/start-docker-compose.sh
-	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m -count=1
+	#The ulimit command is required to allow the tests to open more than the default 256 files as set on MacOS. The tests will fail without this. It must be done as one
+	#command otherwise the setting is lost
+	ulimit -n 1024; TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m -count=1
 	@sh scripts/stop-docker-compose.sh
 
 vet:
