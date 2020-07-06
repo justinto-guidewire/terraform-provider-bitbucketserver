@@ -5,7 +5,9 @@ import (
 	"github.com/hashicorp/terraform/helper/resource"
 	"net/http"
 	"net/url"
+	"os"
 	"regexp"
+	"strings"
 	"testing"
 )
 
@@ -39,8 +41,6 @@ func TestAccBitbucketResourceGroup_DisallowImport(t *testing.T) {
 		}
 	`, resourceName, groupName)
 
-	fmt.Printf("config: %s", config)
-
 	createGroup(groupName)
 
 	resource.Test(t, resource.TestCase{
@@ -68,8 +68,6 @@ func TestAccBitbucketResourceGroup_AllowImport(t *testing.T) {
 		}
 	`, resourceName, groupName)
 
-	fmt.Printf("config: %s", config)
-
 	createGroup(groupName)
 
 	resource.Test(t, resource.TestCase{
@@ -92,18 +90,15 @@ func createGroup(groupName string) {
 }
 
 func newBitbucketClient() *BitbucketClient {
-	//serverSanitized := d.Get("server").(string)
-	serverSanitized := "http://localhost:7990"
-	//if strings.HasSuffix(serverSanitized, "/") {
-	//	serverSanitized = serverSanitized[0 : len(serverSanitized)-1]
-	//}
+	serverSanitized := os.Getenv("BITBUCKET_SERVER")
+	if strings.HasSuffix(serverSanitized, "/") {
+		serverSanitized = serverSanitized[0 : len(serverSanitized)-1]
+	}
 
 	return &BitbucketClient{
-		Server: serverSanitized,
-		//Username:   d.Get("username").(string),
-		Username: "admin",
-		//Password:   d.Get("password").(string),
-		Password:   "admin",
+		Server:     serverSanitized,
+		Username:   os.Getenv("BITBUCKET_USERNAME"),
+		Password:   os.Getenv("BITBUCKET_PASSWORD"),
 		HTTPClient: &http.Client{},
 	}
 }
