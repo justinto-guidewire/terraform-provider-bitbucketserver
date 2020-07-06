@@ -41,7 +41,7 @@ func resourceGroupCreate(d *schema.ResourceData, m interface{}) error {
 	var newResource = true
 	_, err := client.Post(fmt.Sprintf("/rest/api/1.0/admin/groups?name=%s", url.QueryEscape(groupName)), nil)
 	if err != nil {
-		if !(importIfExists && strings.Contains(err.Error(), "group with the same key already exists")) {
+		if importIfExists && strings.Contains(err.Error(), "API Error: 409") {
 			newResource = false
 		} else {
 			return err
