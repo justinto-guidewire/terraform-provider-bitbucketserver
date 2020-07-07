@@ -25,6 +25,7 @@ testacc: fmtcheck
 	ulimit -n 1024; TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m -count=1
 
 testacc-bitbucket: fmtcheck
+	echo $BITBUCKET
 	@bash scripts/start-docker-compose.sh
 	#The ulimit command is required to allow the tests to open more than the default 256 files as set on MacOS. The tests will fail without this. It must be done as one
 	#command otherwise the setting is lost
