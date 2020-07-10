@@ -5,11 +5,14 @@ export GO111MODULE=on
 
 export TESTARGS=-race -coverprofile=coverage.txt -covermode=atomic
 
-export BITBUCKET_SERVER=http://localhost:7990
+export BITBUCKET_SERVER?=http://localhost:7990
 export BITBUCKET_USERNAME=admin
 export BITBUCKET_PASSWORD=admin
 
 default: build
+
+asd:
+	echo $(BITBUCKET_SERVER)
 
 build: fmtcheck
 	go install
