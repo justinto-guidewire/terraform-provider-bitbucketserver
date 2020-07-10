@@ -11,9 +11,6 @@ export BITBUCKET_PASSWORD=admin
 
 default: build
 
-asd:
-	echo $(BITBUCKET_SERVER)
-
 build: fmtcheck
 	go install
 
